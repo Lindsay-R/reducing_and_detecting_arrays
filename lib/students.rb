@@ -42,14 +42,22 @@ class Students
     all[0..num].each do |student|
       ages<<student[:age]
     end
-    ages.include? age
 
+    tf=[]
 
+    ages.each do |a|
+      if a > age
+        tf << true
+      end
+    end
 
+    tf.include?(true)
 
   end
 
   def find_student(student_to_find)
+
+   
 
   end
 
@@ -62,4 +70,9 @@ class Students
 
 
   end
+
+
+
+
+
 end
