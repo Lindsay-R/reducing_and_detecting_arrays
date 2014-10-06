@@ -57,12 +57,22 @@ class Students
 
   def find_student(student_to_find)
 
-   
+    num = all.count
+
+    included = all[0..num].include?(student_to_find)
+
+    if included == true
+      return student_to_find
+    else
+      return nil
+    end
 
   end
 
   def student_present?(student_to_find)
+    num = all.count
 
+    all[0..num].include?(student_to_find)
   end
 
   def grouped_by_age
