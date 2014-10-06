@@ -33,7 +33,12 @@ class Students
   end
 
   def find_first_older_than(age)
-
+    num = all.count
+    all[0..num].each do |student|
+      if student[:age] > age
+        return student
+      end
+    end
   end
 
   def any_older_than?(age)
