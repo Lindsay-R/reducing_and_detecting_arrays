@@ -13,7 +13,7 @@ class Students
 
     ages=[]
     num = all.count
-    all[0..num].each do |student|
+    all[0..-1].each do |student|
       ages<<student[:age]
     end
     ages.inject{|sum, el| sum + el}/num
@@ -23,8 +23,7 @@ class Students
   def name_string
 
     names=[]
-    num = all.count
-    all[0..num].each do |student|
+    all[0..-1].each do |student|
     names<<student[:name]
     end
 
@@ -33,8 +32,7 @@ class Students
   end
 
   def find_first_older_than(age)
-    num = all.count
-    all[0..num].each do |student|
+    all[0..-1].each do |student|
       if student[:age] > age
         return student
       end
@@ -43,28 +41,27 @@ class Students
 
   def any_older_than?(age)
     ages=[]
-    num = all.count
-    all[0..num].each do |student|
+    all[0..-1].each do |student|
       ages<<student[:age]
     end
 
-    tf=[]
-
-    ages.each do |a|
-      if a > age
-        tf << true
-      end
+    x= ages.reduce([]) do |result, value|
+      result << value if value > age
+      result
     end
 
-    tf.include?(true)
+    if x.first != nil
+      x.first>21
+    else
+      false
+    end
+
 
   end
 
   def find_student(student_to_find)
 
-    num = all.count
-
-    included = all[0..num].include?(student_to_find)
+    included = all[0..-1].include?(student_to_find)
 
     if included == true
       return student_to_find
@@ -75,12 +72,22 @@ class Students
   end
 
   def student_present?(student_to_find)
-    num = all.count
-
-    all[0..num].include?(student_to_find)
+    all[0..-1].include?(student_to_find)
   end
 
   def grouped_by_age
+   sort_ages=[]
+
+
+   all[0..-1].each do |student|
+      sort_ages << [student[:age], [student[:name]]]
+   end
+
+   Hash[sort_ages]
+
+#     group = all.group_by {|hash| hash[:age]}
+#
+# puts group[10]
 
 
 
